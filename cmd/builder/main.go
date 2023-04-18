@@ -2,17 +2,20 @@ package main
 
 import (
 	"fmt"
-	"patterns/internal/builder"
+
+	"patterns/internal/builder/director"
+	"patterns/internal/builder/game"
+	"patterns/internal/builder/work"
 )
 
 func main() {
-	gamingComputer := &builder.GamingComputerBuilder{}
-	workingComputer := &builder.WorkingComputerBuilder{}
-	director := &builder.Director{}
-	director.SetBuilder(gamingComputer)
-	computer := director.BuildComputer()
-	fmt.Println(computer)
-	director.SetBuilder(workingComputer)
-	computer = director.BuildComputer()
-	fmt.Println(computer)
+	wcb := work.NewWorkingComputerBuilder()
+	d := director.NewDirector(wcb)
+	pc := d.BuildComputer()
+	fmt.Println("Working computer setup:", pc)
+
+	gcb := game.NewGamingComputerBuilder()
+	d.SetBuilder(gcb)
+	pc = d.BuildComputer()
+	fmt.Println("Gaming computer setup:", pc)
 }
