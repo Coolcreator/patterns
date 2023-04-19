@@ -1,15 +1,29 @@
 package main
 
 import (
-	"fmt"
-	"patterns/internal/factory"
+	"log"
+
+	"patterns/internal/factory/factory"
 )
 
 func main() {
-	phone, _ := factory.GetPhone("iphone")
-	fmt.Println(phone.GetOS(), phone.GetManufacturer())
-	phone, _ = factory.GetPhone("sony")
-	fmt.Println(phone.GetOS(), phone.GetManufacturer())
-	phone, err := factory.GetPhone("?")
-	fmt.Println(err)
+	log.SetFlags(0)
+
+	iphone, err := factory.GetPhone("iphone")
+	if err != nil {
+		log.Fatalf("get phone error: %v\n", err)
+	}
+	log.Println("OS:", iphone.GetOS(), "Manufacturer:", iphone.GetManufacturer())
+
+	sony, err := factory.GetPhone("sony")
+	if err != nil {
+		log.Fatalf("get phone error: %v\n", err)
+	}
+	log.Println("OS:", sony.GetOS(), "Manufacturer:", sony.GetManufacturer())
+
+	blackberry, err := factory.GetPhone("blackberry")
+	if err != nil {
+		log.Fatalf("get phone error: %v\n", err)
+	}
+	log.Println("OS:", blackberry.GetOS(), "Manufacturer:", blackberry.GetManufacturer())
 }
