@@ -1,4 +1,4 @@
-package cor
+package models
 
 type Person struct {
 	Name   string

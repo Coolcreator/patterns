@@ -1,22 +1,26 @@
 package main
 
 import (
-	cor "patterns/internal/chain-of-responsibility"
+	"patterns/internal/chain-of-responsibility/api/models"
+	"patterns/internal/chain-of-responsibility/asylum"
+	"patterns/internal/chain-of-responsibility/school"
+	"patterns/internal/chain-of-responsibility/university"
+	"patterns/internal/chain-of-responsibility/work"
 )
 
 func main() {
-	asylum := &cor.Asylum{}
+	a := asylum.NewAsylum()
+	w := work.NewWork()
+	u := university.NewUniversity()
+	s := school.NewSchool()
 
-	work := &cor.Work{}
-	work.SetNext(asylum)
+	s.SetNext(u)
+	u.SetNext(w)
+	w.SetNext(a)
 
-	university := &cor.University{}
-	university.SetNext(work)
+	p := &models.Person{
+		Name: "Ivar",
+	}
 
-	school := &cor.School{}
-	school.SetNext(university)
-
-	p := &cor.Person{Name: "Alexey"}
-
-	school.Execute(p)
+	s.Execute(p)
 }
