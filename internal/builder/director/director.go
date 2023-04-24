@@ -1,42 +1,34 @@
 package director
 
-import (
-	"patterns/internal/builder/api/models"
-)
+import "patterns/internal/builder"
 
-type computerBuilder interface {
-	SetProcessor()
-	SetGraphicsCard()
-	SetRAM()
-	SetMemory()
-	SetOS()
-	GetComputer() models.Computer
-}
-
+// Director распоряжается строителем и задает ему порядок шагов строительства
 type Director interface {
-	SetBuilder(builder computerBuilder)
-	BuildComputer() models.Computer
+	SetBuilder(builder builder.BuildProcess)
+	BuildComputer()
 }
 
 type director struct {
-	builder computerBuilder
+	builder builder.BuildProcess
 }
 
-func (d *director) SetBuilder(builder computerBuilder) {
+// SetBuilder устанавливает строителя
+func (d *director) SetBuilder(builder builder.BuildProcess) {
 	d.builder = builder
 }
 
-func (d *director) BuildComputer() models.Computer {
-	d.builder.SetProcessor()
-	d.builder.SetGraphicsCard()
-	d.builder.SetRAM()
-	d.builder.SetMemory()
-	d.builder.SetOS()
-
-	return d.builder.GetComputer()
+// BuildComputer конструирует новый компьютер
+func (d *director) BuildComputer() {
+	d.builder.
+		SetProcessor().
+		SetGraphicsCard().
+		SetRAM().
+		SetSSD().
+		SetOS()
 }
 
-func NewDirector(builder computerBuilder) Director {
+// NewDirector создает новый экземпляр Director
+func NewDirector(builder builder.BuildProcess) Director {
 	return &director{
 		builder: builder,
 	}

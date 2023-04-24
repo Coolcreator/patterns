@@ -4,18 +4,19 @@ import (
 	"fmt"
 
 	"patterns/internal/builder/director"
-	"patterns/internal/builder/game"
-	"patterns/internal/builder/work"
+	"patterns/internal/builder/gaming"
+	"patterns/internal/builder/working"
 )
 
 func main() {
-	wcb := work.NewWorkingComputerBuilder()
+	wcb := working.NewWorkingComputerBuilder()
 	d := director.NewDirector(wcb)
-	pc := d.BuildComputer()
-	fmt.Println("Working computer setup:", pc)
-
-	gcb := game.NewGamingComputerBuilder()
+	d.BuildComputer()
+	wpc := wcb.GetComputer()
+	fmt.Println("Working computer setup:", wpc)
+	gcb := gaming.NewGamingComputerBuilder()
 	d.SetBuilder(gcb)
-	pc = d.BuildComputer()
-	fmt.Println("Gaming computer setup:", pc)
+	d.BuildComputer()
+	gpc := gcb.GetComputer()
+	fmt.Println("Gaming computer setup:", gpc)
 }
