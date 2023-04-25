@@ -2,13 +2,10 @@ package director
 
 import (
 	"testing"
-
-	"patterns/internal/builder/gaming"
-	"patterns/internal/builder/working"
 )
 
 func TestDirector_SetBuilder(t *testing.T) {
-	expected := gaming.NewGamingComputerBuilder()
+	expected := NewComputerBuilderMock()
 	d := &director{}
 	d.SetBuilder(expected)
 	got := d.builder
@@ -18,11 +15,15 @@ func TestDirector_SetBuilder(t *testing.T) {
 }
 
 func TestDirector_BuildComputer(t *testing.T) {
-	b := working.NewWorkingComputerBuilder()
+	b := NewComputerBuilderMock()
 	d := &director{builder: b}
 	d.BuildComputer()
 	c := b.GetComputer()
-	if c.Processor == "" || c.GraphicsCard == "" || c.RAM == "" || c.SSD == "" || c.OS == "" {
-		t.Errorf("build computer error: empty field")
+	if c.Processor != "Test processor" ||
+		c.GraphicsCard != "Test graphics card" ||
+		c.RAM != "Test RAM" ||
+		c.SSD != "Test SSD" ||
+		c.OS != "Test OS" {
+		t.Errorf("build computer error: unexpected component")
 	}
 }

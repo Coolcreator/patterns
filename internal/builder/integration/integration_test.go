@@ -1,9 +1,9 @@
 package integration
 
 import (
-	"patterns/internal/api/computer"
 	"testing"
 
+	"patterns/internal/api/computer"
 	"patterns/internal/builder/director"
 	"patterns/internal/builder/gaming"
 	"patterns/internal/builder/working"

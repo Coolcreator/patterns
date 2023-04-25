@@ -1,8 +1,9 @@
 package working
 
 import (
-	"patterns/internal/api/computer"
 	"testing"
+
+	"patterns/internal/api/computer"
 )
 
 func TestWorkingComputerBuilder_SetProcessor(t *testing.T) {

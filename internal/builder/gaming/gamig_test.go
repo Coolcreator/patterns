@@ -1,8 +1,9 @@
 package gaming
 
 import (
-	"patterns/internal/api/computer"
 	"testing"
+
+	"patterns/internal/api/computer"
 )
 
 func TestGamingComputerBuilder_SetProcessor(t *testing.T) {

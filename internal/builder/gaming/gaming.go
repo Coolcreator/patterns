@@ -2,7 +2,6 @@ package gaming
 
 import (
 	"patterns/internal/api/computer"
-	"patterns/internal/builder"
 )
 
 type gamingComputerBuilder struct {
@@ -10,33 +9,28 @@ type gamingComputerBuilder struct {
 }
 
 // SetProcessor устанавливает процессор
-func (b *gamingComputerBuilder) SetProcessor() builder.BuildProcess {
+func (b *gamingComputerBuilder) SetProcessor() {
 	b.g.Processor = "Intel Core i7 12th Gen 12700F"
-	return b
 }
 
 // SetGraphicsCard устанавливает графическую карту
-func (b *gamingComputerBuilder) SetGraphicsCard() builder.BuildProcess {
+func (b *gamingComputerBuilder) SetGraphicsCard() {
 	b.g.GraphicsCard = "NVIDIA GeForce RTX 3070 8 GB"
-	return b
 }
 
 // SetRAM устанавливает оперативную память
-func (b *gamingComputerBuilder) SetRAM() builder.BuildProcess {
+func (b *gamingComputerBuilder) SetRAM() {
 	b.g.RAM = "16GB DDR4"
-	return b
 }
 
 // SetSSD устанавливает твердотельный накопитель
-func (b *gamingComputerBuilder) SetSSD() builder.BuildProcess {
+func (b *gamingComputerBuilder) SetSSD() {
 	b.g.SSD = "512 GB PCIe SSD"
-	return b
 }
 
 // SetOS устанавливает операционную систему
-func (b *gamingComputerBuilder) SetOS() builder.BuildProcess {
+func (b *gamingComputerBuilder) SetOS() {
 	b.g.OS = "Windows 11 Home"
-	return b
 }
 
 // GetComputer возвращает экземпляр игрового компьютера
