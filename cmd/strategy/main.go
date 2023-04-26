@@ -1,11 +1,14 @@
 package main
 
-import "patterns/internal/strategy"
+import (
+	"patterns/internal/strategy/document"
+	"patterns/internal/strategy/image"
+	"patterns/internal/strategy/printer"
+)
 
 func main() {
-	img := strategy.NewImage("png")
-	doc := strategy.NewDocument("pdf")
-
-	strategy.Output(img)
-	strategy.Output(doc)
+	img := image.NewImage("png")
+	printer.Print(img)
+	doc := document.NewDocument("pdf")
+	printer.Print(doc)
 }
