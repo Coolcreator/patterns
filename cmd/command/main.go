@@ -1,15 +1,18 @@
 package main
 
 import (
-	com "patterns/internal/command"
-	"time"
+	"patterns/internal/command/code"
+	"patterns/internal/command/developer"
+	"patterns/internal/command/eat"
+	"patterns/internal/command/sleep"
 )
 
 func main() {
-	d := com.Developer{Command: &com.Eat{Food: "pie"}}
-	d.Do()
-	d.Command = &com.Sleep{D: time.Second}
-	d.Do()
-	d.Command = &com.Code{Project: "ks8"}
-	d.Do()
+	d := developer.NewDeveloper()
+	e := eat.NewEat("pie")
+	d.SetCommand(e).Do()
+	s := sleep.NewSleep(60)
+	d.SetCommand(s).Do()
+	c := code.NewCode("recipeService")
+	d.SetCommand(c).Do()
 }
