@@ -1,22 +1,33 @@
 package iphone
 
-import "patterns/internal/factory/api/models"
+import (
+	"patterns/internal/api/phone"
+)
 
-type phone struct {
-	models.Phone
+// Iphone представляет собой смартфон Apple Iphone
+type Iphone interface {
+	GetOS() string
+	GetManufacturer() string
 }
 
-func (p *phone) GetOS() string {
-	return p.OS
+type iphone struct {
+	p phone.Phone
 }
 
-func (p *phone) GetManufacturer() string {
-	return p.Manufacturer
+// GetOS возвращает операционную систему смартфона
+func (i *iphone) GetOS() string {
+	return i.p.OS
 }
 
-func NewPhone() *phone {
-	return &phone{
-		Phone: models.Phone{
+// GetManufacturer возвращает производителя смартфона
+func (i *iphone) GetManufacturer() string {
+	return i.p.Manufacturer
+}
+
+// NewIPhone создает новый экземпляр смартфона Apple Iphone
+func NewIPhone() Iphone {
+	return &iphone{
+		p: phone.Phone{
 			OS:           "IOS",
 			Manufacturer: "Apple",
 		},
