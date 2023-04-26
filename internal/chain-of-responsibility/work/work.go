@@ -3,24 +3,36 @@ package work
 import (
 	"fmt"
 
-	cor "patterns/internal/chain-of-responsibility"
-	"patterns/internal/chain-of-responsibility/api/models"
+	"patterns/internal/api/person"
 )
 
-type work struct {
-	next cor.Step
+type step interface {
+	Execute(p *person.Person)
 }
 
-func (w *work) Execute(p *models.Person) {
+// Work представляет собой обработчик работы
+type Work interface {
+	step
+	SetNext(next step)
+}
+
+type work struct {
+	next step
+}
+
+// Execute запускает обработчик работы
+func (w *work) Execute(p *person.Person) {
 	fmt.Printf("[Work] person %s is working\n", p.Name)
 
 	w.next.Execute(p)
 }
 
-func (w *work) SetNext(next cor.Step) {
+// SetNext устанавливает следующий обработчик
+func (w *work) SetNext(next step) {
 	w.next = next
 }
 
-func NewWork() cor.Step {
+// NewWork возвращает экземпляр обработчика работы
+func NewWork() Work {
 	return &work{}
 }

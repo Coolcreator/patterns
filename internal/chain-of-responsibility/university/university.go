@@ -3,24 +3,36 @@ package university
 import (
 	"fmt"
 
-	cor "patterns/internal/chain-of-responsibility"
-	"patterns/internal/chain-of-responsibility/api/models"
+	"patterns/internal/api/person"
 )
 
-type university struct {
-	next cor.Step
+type step interface {
+	Execute(p *person.Person)
 }
 
-func (u *university) Execute(p *models.Person) {
+// University представляет собой обработчик университета
+type University interface {
+	step
+	SetNext(next step)
+}
+
+type university struct {
+	next step
+}
+
+// Execute запускает обработчик университета
+func (u *university) Execute(p *person.Person) {
 	fmt.Printf("[University] person %s is learning in university\n", p.Name)
 
 	u.next.Execute(p)
 }
 
-func (u *university) SetNext(next cor.Step) {
+// SetNext устанавливает следующий обработчик
+func (u *university) SetNext(next step) {
 	u.next = next
 }
 
-func NewUniversity() cor.Step {
+// NewUniversity возвращает экземпляр обработчика университета
+func NewUniversity() University {
 	return &university{}
 }

@@ -3,24 +3,36 @@ package school
 import (
 	"fmt"
 
-	cor "patterns/internal/chain-of-responsibility"
-	"patterns/internal/chain-of-responsibility/api/models"
+	"patterns/internal/api/person"
 )
 
-type school struct {
-	next cor.Step
+type step interface {
+	Execute(p *person.Person)
 }
 
-func (s *school) Execute(p *models.Person) {
+// School представляет собой обработчик школы
+type School interface {
+	step
+	SetNext(next step)
+}
+
+type school struct {
+	next step
+}
+
+// Execute запускает обработчик школы
+func (s *school) Execute(p *person.Person) {
 	fmt.Printf("[School] person %s is learning in school\n", p.Name)
 
 	s.next.Execute(p)
 }
 
-func (s *school) SetNext(next cor.Step) {
+// SetNext устанавливает следующий обработчик
+func (s *school) SetNext(next step) {
 	s.next = next
 }
 
-func NewSchool() cor.Step {
+// NewSchool возвращает экземпляр обработчика школы
+func NewSchool() School {
 	return &school{}
 }

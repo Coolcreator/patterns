@@ -3,22 +3,34 @@ package asylum
 import (
 	"fmt"
 
-	cor "patterns/internal/chain-of-responsibility"
-	"patterns/internal/chain-of-responsibility/api/models"
+	"patterns/internal/api/person"
 )
 
-type asylum struct {
-	next cor.Step
+type executor interface {
+	Execute(p *person.Person)
 }
 
-func (a *asylum) Execute(p *models.Person) {
+// Asylum представляет собой обработчик психиатрической больницы
+type Asylum interface {
+	executor
+	SetNext(next executor)
+}
+
+type asylum struct {
+	next executor
+}
+
+// Execute запускает обработчик психиатрической больницы
+func (*asylum) Execute(p *person.Person) {
 	fmt.Printf("[Asylum] person %s is in mental institution\n", p.Name)
 }
 
-func (a *asylum) SetNext(next cor.Step) {
+// SetNext устанавливает следующий обработчик
+func (a *asylum) SetNext(next executor) {
 	a.next = next
 }
 
-func NewAsylum() cor.Step {
+// NewAsylum возвращает обработчик психиатрической больницы
+func NewAsylum() Asylum {
 	return &asylum{}
 }

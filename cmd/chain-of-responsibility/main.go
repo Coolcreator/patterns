@@ -1,7 +1,7 @@
 package main
 
 import (
-	"patterns/internal/chain-of-responsibility/api/models"
+	"patterns/internal/api/person"
 	"patterns/internal/chain-of-responsibility/asylum"
 	"patterns/internal/chain-of-responsibility/school"
 	"patterns/internal/chain-of-responsibility/university"
@@ -13,14 +13,13 @@ func main() {
 	w := work.NewWork()
 	u := university.NewUniversity()
 	s := school.NewSchool()
-
-	s.SetNext(u)
-	u.SetNext(w)
 	w.SetNext(a)
-
-	p := &models.Person{
-		Name: "Ivar",
+	u.SetNext(w)
+	s.SetNext(u)
+	p := &person.Person{
+		Name:   "Aleksey",
+		Course: 1,
+		Group:  118,
 	}
-
 	s.Execute(p)
 }
