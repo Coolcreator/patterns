@@ -4,6 +4,16 @@ import (
 	"patterns/internal/api/computer"
 )
 
+// WorkingComputerBuilder представляет собой билдер рабочего компьютера
+type WorkingComputerBuilder interface {
+	SetProcessor()
+	SetGraphicsCard()
+	SetRAM()
+	SetSSD()
+	SetOS()
+	GetComputer() computer.Computer
+}
+
 type workingComputerBuilder struct {
 	w computer.Computer
 }
@@ -39,6 +49,6 @@ func (b *workingComputerBuilder) GetComputer() computer.Computer {
 }
 
 // NewWorkingComputerBuilder возвращает экземпляр workingComputerBuilder
-func NewWorkingComputerBuilder() *workingComputerBuilder {
+func NewWorkingComputerBuilder() WorkingComputerBuilder {
 	return &workingComputerBuilder{}
 }

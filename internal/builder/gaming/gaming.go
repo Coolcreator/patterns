@@ -4,6 +4,16 @@ import (
 	"patterns/internal/api/computer"
 )
 
+// GamingComputerBuilder представляет собой билдер игрового компьютера
+type GamingComputerBuilder interface {
+	SetProcessor()
+	SetGraphicsCard()
+	SetRAM()
+	SetSSD()
+	SetOS()
+	GetComputer() computer.Computer
+}
+
 type gamingComputerBuilder struct {
 	g computer.Computer
 }
@@ -39,6 +49,6 @@ func (b *gamingComputerBuilder) GetComputer() computer.Computer {
 }
 
 // NewGamingComputerBuilder возвращает экземпляр gamingComputerBuilder
-func NewGamingComputerBuilder() *gamingComputerBuilder {
+func NewGamingComputerBuilder() GamingComputerBuilder {
 	return &gamingComputerBuilder{}
 }

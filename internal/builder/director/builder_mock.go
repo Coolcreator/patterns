@@ -37,6 +37,6 @@ func (b *computerBuilderMock) GetComputer() computer.Computer {
 }
 
 // NewComputerBuilderMock возвращает экземпляр computerBuilderMock
-func NewComputerBuilderMock() *computerBuilderMock {
+func NewComputerBuilderMock() buildProcess {
 	return &computerBuilderMock{}
 }
