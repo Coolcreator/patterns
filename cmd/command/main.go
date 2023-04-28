@@ -1,18 +1,20 @@
 package main
 
 import (
-	"patterns/internal/command/code"
-	"patterns/internal/command/developer"
-	"patterns/internal/command/eat"
-	"patterns/internal/command/sleep"
+	"fmt"
+
+	"patterns/internal/command/calculator"
+	"patterns/internal/command/command"
+	"patterns/internal/command/director"
 )
 
 func main() {
-	d := developer.NewDeveloper()
-	e := eat.NewEat("pie")
-	d.SetCommand(e).Do()
-	s := sleep.NewSleep(60)
-	d.SetCommand(s).Do()
-	c := code.NewCode("recipeService")
-	d.SetCommand(c).Do()
+	c := calculator.NewCalculator()
+	director := director.NewDirector()
+	director.ExecuteCommand(command.NewAddCommand(c, 10))
+	fmt.Println(c.GetValue())
+	director.ExecuteCommand(command.NewSubtractCommand(c, 5))
+	fmt.Println(c.GetValue())
+	director.UndoLastCommand()
+	fmt.Println(c.GetValue())
 }
