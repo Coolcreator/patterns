@@ -1,27 +1,15 @@
 package main
 
 import (
-	"log"
+	"fmt"
 
-	"patterns/internal/factory/factory"
-	"patterns/internal/factory/iphone"
-	"patterns/internal/factory/sony"
+	"patterns/internal/factory"
 )
 
 func main() {
-	log.SetFlags(0)
-	f := factory.NewFactory(map[string]factory.Phone{
-		"sony":   sony.NewSony(),
-		"iphone": iphone.NewIPhone(),
-	})
-	p, err := f.GetPhone("sony")
-	if err != nil {
-		log.Fatalf("get phone error: %v\n", err)
-	}
-	log.Println("OS:", p.GetOS(), "Manufacturer:", p.GetManufacturer())
-	p, err = f.GetPhone("iphone")
-	if err != nil {
-		log.Fatalf("get phone error: %v\n", err)
-	}
-	log.Println("OS:", p.GetOS(), "Manufacturer:", p.GetManufacturer())
+	f := factory.NewLaptopFactory()
+	l := f.CreateLaptop("lenovo", "thinkPad")
+	fmt.Println(l.DisplayDescription())
+	d := f.CreateLaptop("dell", "latitude")
+	fmt.Println(d.DisplayDescription())
 }
