@@ -5,18 +5,18 @@ import (
 )
 
 type buildProcess interface {
-	SetProcessor()
-	SetGraphicsCard()
-	SetRAM()
-	SetSSD()
-	SetOS()
+	SetProcessor(processor string)
+	SetGraphicsCard(graphicsCard string)
+	SetRAM(ram string)
+	SetSSD(ssd string)
+	SetOS(os string)
 	GetComputer() computer.Computer
 }
 
 // Director распоряжается строителем и задает ему порядок шагов строительства
 type Director interface {
 	SetBuilder(builder buildProcess)
-	BuildComputer()
+	BuildComputer(processor, graphicsCard, ram, ssd, os string) computer.Computer
 }
 
 type director struct {
@@ -29,12 +29,19 @@ func (d *director) SetBuilder(builder buildProcess) {
 }
 
 // BuildComputer конструирует новый компьютер
-func (d *director) BuildComputer() {
-	d.builder.SetProcessor()
-	d.builder.SetGraphicsCard()
-	d.builder.SetRAM()
-	d.builder.SetSSD()
-	d.builder.SetOS()
+func (d *director) BuildComputer(
+	processor string,
+	graphicsCard string,
+	ram string,
+	ssd string,
+	os string,
+) computer.Computer {
+	d.builder.SetProcessor(processor)
+	d.builder.SetGraphicsCard(graphicsCard)
+	d.builder.SetRAM(ram)
+	d.builder.SetSSD(ssd)
+	d.builder.SetOS(os)
+	return d.builder.GetComputer()
 }
 
 // NewDirector создает новый экземпляр Director

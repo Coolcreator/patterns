@@ -17,8 +17,7 @@ func TestDirector_SetBuilder(t *testing.T) {
 func TestDirector_BuildComputer(t *testing.T) {
 	b := NewComputerBuilderMock()
 	d := &director{builder: b}
-	d.BuildComputer()
-	c := b.GetComputer()
+	c := d.BuildComputer("processor", "graphicsCard", "ram", "ssd", "os")
 	if c.Processor != "Test processor" ||
 		c.GraphicsCard != "Test graphics card" ||
 		c.RAM != "Test RAM" ||

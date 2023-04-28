@@ -6,11 +6,11 @@ import (
 
 // WorkingComputerBuilder представляет собой билдер рабочего компьютера
 type WorkingComputerBuilder interface {
-	SetProcessor()
-	SetGraphicsCard()
-	SetRAM()
-	SetSSD()
-	SetOS()
+	SetProcessor(processor string)
+	SetGraphicsCard(graphicsCard string)
+	SetRAM(ram string)
+	SetSSD(ssd string)
+	SetOS(os string)
 	GetComputer() computer.Computer
 }
 
@@ -19,28 +19,28 @@ type workingComputerBuilder struct {
 }
 
 // SetProcessor устанавливает процессор
-func (b *workingComputerBuilder) SetProcessor() {
-	b.w.Processor = "Intel Core i7 8th Gen 8665U"
+func (b *workingComputerBuilder) SetProcessor(processor string) {
+	b.w.Processor = processor
 }
 
 // SetGraphicsCard устанавливает графическую карту
-func (b *workingComputerBuilder) SetGraphicsCard() {
-	b.w.GraphicsCard = "Intel UHD Graphics 620"
+func (b *workingComputerBuilder) SetGraphicsCard(graphicsCard string) {
+	b.w.GraphicsCard = graphicsCard
 }
 
 // SetRAM устанавливает оперативную память
-func (b *workingComputerBuilder) SetRAM() {
-	b.w.RAM = "8GB DDR4"
+func (b *workingComputerBuilder) SetRAM(ram string) {
+	b.w.RAM = ram
 }
 
 // SetSSD устанавливает твердотельный накопитель
-func (b *workingComputerBuilder) SetSSD() {
-	b.w.SSD = "512 GB PCIe SSD"
+func (b *workingComputerBuilder) SetSSD(SSD string) {
+	b.w.SSD = SSD
 }
 
 // SetOS устанавливает операционную систему
-func (b *workingComputerBuilder) SetOS() {
-	b.w.OS = "Windows 11 Pro"
+func (b *workingComputerBuilder) SetOS(OS string) {
+	b.w.OS = OS
 }
 
 // GetComputer возвращает экземпляр рабочего компьютера

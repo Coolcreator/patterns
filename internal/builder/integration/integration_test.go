@@ -19,7 +19,13 @@ func TestBuilderPattern(t *testing.T) {
 	}
 	gcb := gaming.NewGamingComputerBuilder()
 	d := director.NewDirector(gcb)
-	d.BuildComputer()
+	d.BuildComputer(
+		"Intel Core i7 12th Gen 12700F",
+		"NVIDIA GeForce RTX 3070 8 GB",
+		"16GB DDR4",
+		"512 GB PCIe SSD",
+		"Windows 11 Home",
+	)
 	got := gcb.GetComputer()
 	if expected != got {
 		t.Errorf("expected %#v, got %#v", expected, got)
@@ -33,7 +39,13 @@ func TestBuilderPattern(t *testing.T) {
 	}
 	wcb := working.NewWorkingComputerBuilder()
 	d.SetBuilder(wcb)
-	d.BuildComputer()
+	d.BuildComputer(
+		"Intel Core i7 8th Gen 8665U",
+		"Intel UHD Graphics 620",
+		"8GB DDR4",
+		"512 GB PCIe SSD",
+		"Windows 11 Pro",
+	)
 	got = wcb.GetComputer()
 	if expected != got {
 		t.Errorf("expected %#v, got %#v", expected, got)

@@ -7,27 +7,27 @@ type computerBuilderMock struct {
 }
 
 // SetProcessor устанавливает процессор
-func (b *computerBuilderMock) SetProcessor() {
+func (b *computerBuilderMock) SetProcessor(processor string) {
 	b.c.Processor = "Test processor"
 }
 
 // SetGraphicsCard устанавливает графическую карту
-func (b *computerBuilderMock) SetGraphicsCard() {
+func (b *computerBuilderMock) SetGraphicsCard(graphicsCard string) {
 	b.c.GraphicsCard = "Test graphics card"
 }
 
 // SetRAM устанавливает оперативную память
-func (b *computerBuilderMock) SetRAM() {
+func (b *computerBuilderMock) SetRAM(ram string) {
 	b.c.RAM = "Test RAM"
 }
 
 // SetSSD устанавливает твердотельный накопитель
-func (b *computerBuilderMock) SetSSD() {
+func (b *computerBuilderMock) SetSSD(ssd string) {
 	b.c.SSD = "Test SSD"
 }
 
 // SetOS устанавливает операционную систему
-func (b *computerBuilderMock) SetOS() {
+func (b *computerBuilderMock) SetOS(os string) {
 	b.c.OS = "Test OS"
 }
 
